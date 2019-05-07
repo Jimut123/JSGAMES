@@ -17,6 +17,11 @@
 		top: 10%;
 		left: 20%;
 	}
+    button{
+        position: absolute;
+		bottom: 10%;
+		left: 20%;
+    }
 
 </style>
 <head>
@@ -40,7 +45,7 @@
 
 <canvas id="myCanvas" width="480" height="320"></canvas>
 
-
+<button >Click me</button> 
 <script>
 
 var downPressed = false;
@@ -55,6 +60,17 @@ var building_width = 30;
 var building_max_height = 40;
 var score=0;
 var checker=0;
+var main_audio = new Audio('game.mp3');
+main_audio.loop = true;
+main_audio.play();
+
+// https://freesound.org/people/jalastram/packs/21727/
+var jump_Audio = new Audio('jump1.mp3');
+
+var game_over_Audio = new Audio('game_over.mp3')
+
+
+// https://www.audioblocks.com/royalty-free-audio/game+over?search-origin=filters
 
 
 var canvas = document.getElementById("myCanvas");
@@ -68,6 +84,7 @@ document.addEventListener("keyup", keyUpHandler, false);
 function keyDownHandler(e) {
     if(e.key == "Up" || e.key == "ArrowUp") {
         upPressed = true;
+        jump_Audio.play();
         lock = true;
         checker++;
         //console.log("UP ARROW PRESSED!",upPressed);
@@ -156,11 +173,15 @@ function CollisionDetection(){
         //console.log("iter = ",iter," --> ",col_x,"--",col_x+col_width);
         if( ( (ball_x-ball_rad)<col_x && col_x<(ball_x+ball_rad))|| ((ball_x-ball_rad)<(col_x+col_width) && (col_x+col_width)<(ball_x+ball_rad) ) ){
             if(ball_y+ball_rad>col_y ){
+                    main_audio.pause();
+                    game_over_Audio.play();
                     alert("collided");
                     //console.log((ball_x-ball_rad),"--",(ball_x+ball_rad));
                     //console.log("ball_y",ball_y,"col_y",col_y);
                     //console.log("iter = ",iter," --> ",col_x,"--",(col_x+col_width));
+
                     document.location.reload();
+                    game_over_Audio.pause();
             }
             
             else{
