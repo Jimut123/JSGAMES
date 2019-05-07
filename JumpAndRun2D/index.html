@@ -157,9 +157,10 @@ function CollisionDetection(){
         if( ( (ball_x-ball_rad)<col_x && col_x<(ball_x+ball_rad))|| ((ball_x-ball_rad)<(col_x+col_width) && (col_x+col_width)<(ball_x+ball_rad) ) ){
             if(ball_y+ball_rad>col_y ){
                     alert("collided");
-                    console.log((ball_x-ball_rad),"--",(ball_x+ball_rad));
-                    console.log("ball_y",ball_y,"col_y",col_y);
-                    console.log("iter = ",iter," --> ",col_x,"--",(col_x+col_width));
+                    //console.log((ball_x-ball_rad),"--",(ball_x+ball_rad));
+                    //console.log("ball_y",ball_y,"col_y",col_y);
+                    //console.log("iter = ",iter," --> ",col_x,"--",(col_x+col_width));
+                    document.location.reload();
             }
             
             else{
